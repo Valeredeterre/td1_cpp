@@ -1,12 +1,22 @@
 #include "transaction.h"
 
-Transaction::Transaction(Date date, Hour hour, float amount, Client sender, Client receiver, bool state, std::string description)
+Transaction::Transaction(Date date, float amount, Client sender, Client receiver, bool state, std::string description)
 {
     _date = date;
-    _hour = hour;
+    Hour _hour;
     _amount = amount;
     _sender = sender;
     _receiver = receiver;
+    _state = state;
+    _description = description;
+}
+
+Transaction::Transaction(Date date, float amount, Client sender, bool state, std::string description)
+{
+    _date = date;
+    Hour _hour;
+    _amount = amount;
+    _sender = sender;
     _state = state;
     _description = description;
 }
@@ -29,7 +39,6 @@ std::string Transaction::get_transaction()
     }
     std::string description = _description;
 
-    std::string transaction = date + " " + hour + " " + amount + " " + sender + " " + receiver + " " + state + " " + description;
-
+    std::string transaction = "Date : " + date + "\n" + "Hour : " + hour + "\n" + "Amount : " + amount + "\n" + "Sender : " + sender + "\n" + "Receiver : " + receiver + "\n" + "State : " + state + "\n" + "Description : " + description + "\n";
     return transaction;
 }

@@ -1,3 +1,5 @@
+#pragma once
+
 #include "adress.h"
 #include "date.h"
 

@@ -1,5 +1,8 @@
+#pragma once
+
 #include "time.h"
 #include <string>
+#include <iostream>
 
 class Date
 {

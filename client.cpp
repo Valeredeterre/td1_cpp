@@ -12,9 +12,15 @@ Client::Client(std::string name, std::string surname, Adress adress, Date birthd
 
 Client::Client()
 {
-    _name = "John";
-    _surname = "Doe";
-    _adress = Adress();
+    _name = "New";
+    _surname = "Bank";
+    _adress = Adress(1, "rue de la banque", "Zurick", 12345, "Suisse");
     _birthdate = Date();
-    _email = "John.Doe@yopmail.com";
+    _email = "bank.new@bank.com";
+}
+
+std::string Client::get_client()
+{
+    std::string client = _name + " " + _surname + ", " + _adress.get_adress() + ", " + _birthdate.get_date() + ", " + _email + ", " + _phone;
+    return client;
 }

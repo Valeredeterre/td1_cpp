@@ -9,12 +9,13 @@ class Account
         Account(Client client, float balance, int accountNumber, Date openingDate);
         std::string get_account();
         std::string get_transactions_history();
-        void add_transaction(Transaction transaction);
         void add_balance(float amount);
         void send_money(float amount, Account& account);
         void withdraw_money(float amount);
         void freeze_balance(bool state);
+        int get_account_number();
     private:
+        void add_transaction(Transaction transaction);
         Client _client;
         float _balance;
         int _accountNumber;

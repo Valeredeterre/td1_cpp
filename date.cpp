@@ -13,6 +13,7 @@ Date::Date(int m, int d, int y)
         _month = 1;
         _day = 1;
         _year = 2000;
+        std::cout << "Invalid date. Date set to 1/1/2000" << std::endl;
     }
 }
 
@@ -42,4 +43,5 @@ bool Date::is_valid(int m, int d, int y)
     {
         return false;
     }
+    return true;
 }
