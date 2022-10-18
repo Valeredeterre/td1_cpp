@@ -1,22 +1,12 @@
 #include "transaction.h"
 
-Transaction::Transaction(Date date, float amount, Client sender, Client receiver, bool state, std::string description)
+Transaction::Transaction(temporality::Date date, float amount, Account sender, Account receiver, bool state, std::string description)
 {
     _date = date;
-    Hour _hour;
+    temporality::Hour _hour;
     _amount = amount;
     _sender = sender;
     _receiver = receiver;
-    _state = state;
-    _description = description;
-}
-
-Transaction::Transaction(Date date, float amount, Client sender, bool state, std::string description)
-{
-    _date = date;
-    Hour _hour;
-    _amount = amount;
-    _sender = sender;
     _state = state;
     _description = description;
 }
@@ -26,8 +16,8 @@ std::string Transaction::get_transaction()
     std::string date = _date.get_date();
     std::string hour = _hour.get_hour();
     std::string amount = std::to_string(_amount);
-    std::string sender = _sender.get_client();
-    std::string receiver = _receiver.get_client();
+    std::string sender = std::to_string(_sender.get_account_number());
+    std::string receiver = std::to_string(_receiver.get_account_number());
     std::string state;
     if (_state == true)
     {
@@ -39,6 +29,13 @@ std::string Transaction::get_transaction()
     }
     std::string description = _description;
 
-    std::string transaction = "Date : " + date + "\n" + "Hour : " + hour + "\n" + "Amount : " + amount + "\n" + "Sender : " + sender + "\n" + "Receiver : " + receiver + "\n" + "State : " + state + "\n" + "Description : " + description + "\n";
+    std::string transaction = 
+        "Date : " + date + "\n" + 
+        "Hour : " + hour + "\n" + 
+        "Amount : " + amount + " €\n" + 
+        "Sender : " + sender + "\n" + 
+        "Receiver : " + receiver + "\n" + 
+        "State : " + state + "\n" + 
+        "Description : " + description + "\n";
     return transaction;
 }

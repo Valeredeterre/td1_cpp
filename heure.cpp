@@ -1,28 +1,26 @@
 #include "heure.h"
 
 
-    Hour::Hour(int hour, int minute, int second)
+    temporality::Hour::Hour(int hour, int minute, int second)
     {
-        if (hour < 0 || hour > 23)
+        int temps = time(NULL) + 3600*2;
+        if(hour > 24 || hour < 0)
         {
-            std::cout << "Invalid hour" << std::endl;
-            _hour = 0;
-        } else{_hour = hour;}
+            _hour = (temps/3600)%24;
+        }else{_hour = hour;}
 
-        if (minute < 0 || minute > 59)
+        if(minute > 60 || minute < 0)
         {
-            std::cout << "Invalid minute" << std::endl;
-            _minute = 0;
-        } else{_minute = minute;}
+            _minute = (temps/60)%60;            
+        }else{_minute = minute;}
 
-        if (second < 0 || second > 59)
+        if(second > 60 || second < 0)
         {
-            std::cout << "Invalid second" << std::endl;
-            _second = 0;
-        } else{_second = second;}
+            _second = temps%60;          
+        }else{_second = second;}
     }
 
-    Hour::Hour()
+    temporality::Hour::Hour()
     {
         int temps = time(NULL) + 3600*2;
         _second = temps%60;
@@ -30,7 +28,7 @@
         _hour = (temps/3600)%24;
     }
 
-    std::string Hour::get_hour()
+    std::string temporality::Hour::get_hour()
     {
         std::string hour = std::to_string(_hour);
         std::string minute = std::to_string(_minute);

@@ -4,22 +4,22 @@
 #include <iostream>
 #include "date.h"
 #include "heure.h"
-#include "client.h"
+#include "account.h"
 #include "adress.h"
+
+class Account;
 
 class Transaction
 {
 public:
-    Transaction(Date date, float amount, Client sender, Client receiver, bool state, std::string description);
-    Transaction(Date date, float amount, Client sender, bool state, std::string description);
-
+    Transaction(temporality::Date date, float amount, Account sender, Account receiver, bool state, std::string description);
     std::string get_transaction();
 private:
-    Date _date;
-    Hour _hour;
+    temporality::Date _date;
+    temporality::Hour _hour;
     float _amount;
-    Client _sender;
-    Client _receiver;
+    Account _sender;
+    Account _receiver;
     bool _state;
     std::string _description;
 };

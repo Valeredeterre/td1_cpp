@@ -1,6 +1,6 @@
 #include "date.h"
 
-Date::Date(int m, int d, int y)
+temporality::Date::Date(int m, int d, int y)
 {
     if(is_valid(m, d, y))
     {
@@ -10,14 +10,28 @@ Date::Date(int m, int d, int y)
     }
     else
     {
-        _month = 1;
-        _day = 1;
-        _year = 2000;
-        std::cout << "Invalid date. Date set to 1/1/2000" << std::endl;
+        std::cout << "Invalid date. Date set to the current date" << std::endl;
+
+        time_t ttime = time(0);
+        tm *local_time = localtime(&ttime);
+    
+        _year = 1900 + local_time->tm_year;
+        _month = 1 + local_time->tm_mon;
+        _day = local_time->tm_mday;
     }
 }
 
-std::string Date::get_date()
+temporality::Date::Date()
+{
+        time_t ttime = time(0);
+        tm *local_time = localtime(&ttime);
+    
+        _year = 1900 + local_time->tm_year;
+        _month = 1 + local_time->tm_mon;
+        _day = local_time->tm_mday;
+}
+
+std::string temporality::Date::get_date()
 {
     std::string year = std::to_string(_year);
     std::string month = std::to_string(_month);
@@ -28,7 +42,7 @@ std::string Date::get_date()
     return date;
 }
 
-bool Date::is_valid(int m, int d, int y)
+bool temporality::Date::is_valid(int m, int d, int y)
 {
     int days_in_month[12] = {31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31};
     if (y % 4 == 0)
