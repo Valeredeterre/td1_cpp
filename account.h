@@ -1,13 +1,11 @@
 #pragma once
+
 #include "client.h"
 #include "transaction.h"
 #include <vector>
 #include <limits>
 
-
-
 class Transaction;
-
 
 class Account
 {
@@ -17,8 +15,8 @@ class Account
         std::string get_transactions_history();
         void add_balance(float amount);
         void send_money(float amount, Account& account);
-        void withdraw_money(float amount);
-        void deposit_money(float ammount);
+        void withdraw_money(float amount, Account& account);
+        void deposit_money(float ammount, Account& account);
         void freeze_balance(bool state);
         int get_account_number();
     private:

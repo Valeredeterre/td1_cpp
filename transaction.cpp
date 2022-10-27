@@ -1,12 +1,10 @@
 #include "transaction.h"
 
-Transaction::Transaction(temporality::Date date, float amount, Account sender, Account receiver, bool state, std::string description)
+Transaction::Transaction(temporality::Date date, float amount,  Account& sender,  Account& receiver, bool state, std::string description) : _sender(sender), _receiver(receiver)
 {
     _date = date;
     temporality::Hour _hour;
     _amount = amount;
-    _sender = sender;
-    _receiver = receiver;
     _state = state;
     _description = description;
 }

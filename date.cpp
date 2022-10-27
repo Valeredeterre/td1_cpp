@@ -45,10 +45,11 @@ std::string temporality::Date::get_date()
 bool temporality::Date::is_valid(int m, int d, int y)
 {
     int days_in_month[12] = {31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31};
-    if (y % 4 == 0)
+    if (y % 4 == 0 && (y % 100 != 0 || y % 400 == 0))
     {
         days_in_month[1] = 29;
     }
+
     if (m < 1 || m > 12)
     {
         return false;

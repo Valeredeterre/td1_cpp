@@ -58,10 +58,24 @@ void Account::add_balance(float amount)
     this->freeze_balance(false);
 }
 
-void Account::deposit_money(float amount)
+void Account::deposit_money(float amount, Account& account)
 {
     _balance += amount;
-    this->add_transaction(Transaction(temporality::Date(1, 1, 2020), amount, _client, Account(), true, "Add balance")); 
+    this->add_transaction(Transaction(temporality::Date(1, 1, 2020), amount, *this, account, true, "Add balance")); 
+}
+
+void Account::withdraw_money(float amount, Account& account)
+{
+    if(_balance - amount >= 0)
+    {
+        _balance -= amount;
+        this->add_transaction(Transaction(temporality::Date(1, 1, 2020), amount, *this, account, true, "Money withdrawn"));
+    }
+    else
+    {
+        this->freeze_balance(true);
+        this->add_transaction(Transaction(temporality::Date(1, 1, 2020), amount, *this, account , false, "Money withdrawn"));
+    }
 }
 
 void Account::send_money(float amount, Account& account)
@@ -76,20 +90,6 @@ void Account::send_money(float amount, Account& account)
     {
         this->freeze_balance(true);
         this->add_transaction(Transaction(temporality::Date(1, 1, 2020), amount, *this, account, false, "Money sent"));
-    }
-}
-
-void Account::withdraw_money(float amount)
-{
-    if(_balance - amount >= 0)
-    {
-        _balance -= amount;
-        this->add_transaction(Transaction(temporality::Date(1, 1, 2020), amount, _client, Account(), true, "Money withdrawn"));
-    }
-    else
-    {
-        this->freeze_balance(true);
-        this->add_transaction(Transaction(temporality::Date(1, 1, 2020), amount, _client, Account(), false, "Money withdrawn"));
     }
 }
 
